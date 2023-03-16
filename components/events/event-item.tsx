@@ -12,7 +12,7 @@ function EventItem(props: any) {
         month: "long",
         year: "numeric"
     })
-    const formattedAddress = location.replace(',', '/n')
+    const formattedAddress = location.replace(',', '/n');
     const link = `/events/${id}`
     return (
         <li className={classes.item}>
