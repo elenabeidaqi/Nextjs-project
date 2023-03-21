@@ -9,6 +9,7 @@ function eventsID() {
   const router = useRouter();
   const eventId = router.query.eventsID;
   const event = getEventById(eventId)
+  console.log("event" , event)
 
   if(!event){
     return <p>Not Found!</p>
