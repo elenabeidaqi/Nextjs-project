@@ -3,7 +3,7 @@ import React from 'react';
 function eventsSlugs() {
   return (
     <div>
-        events Slugs
+        Filtered Events
     </div>
   )
 }
