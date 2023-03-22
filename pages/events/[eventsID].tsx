@@ -4,6 +4,8 @@ import EventLogistics from "../../components/event-detail/event-logistics";
 import EventSummary from "../../components/event-detail/event-summary";
 import EventContent from "../../components/event-detail/event.content";
 import React from 'react';
+import Button from '@/components/ui/button';
+import ErrorAlert from '@/components/ui/error-alert';
 
 function eventsID() {
   const router = useRouter();
@@ -12,7 +14,14 @@ function eventsID() {
   console.log("event" , event)
 
   if(!event){
-    return <p>Not Found!</p>
+    return <>
+    <ErrorAlert>
+    <p>Not Found!</p>
+    </ErrorAlert>
+    <div className='center'>
+      <Button link="/events">Show all events</Button>
+    </div>
+    </>
   }
 
   return (
