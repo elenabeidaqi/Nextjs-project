@@ -1,14 +1,16 @@
 import axios from "axios";
-
+import {getAllEvents as getAllEvents2} from "../dummy-data"
 
 
 export async function getAllEvents() {
-  const response = await axios.get(
-    "https://nextjs-project-4fa65-default-rtdb.firebaseio.com/events.json"
+ const response = await fetch(
+    "http://localhost:4000"
   )
   
-  const data = await response.data;
+  console.log("res", response)
+  const data = await response.json();
   const events = [];
+  
 
   for (const key in data) {
     events.push({

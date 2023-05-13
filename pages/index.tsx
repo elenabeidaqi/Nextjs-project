@@ -1,4 +1,4 @@
-import { getFeaturedEvents } from "../dummy-data";
+import { getFeaturedEvents } from "../helpers/api-utils";
 import EventList from "@/components/events/event-list";
 import EventSearch from "@/components/events/event.search";
 import { useRouter } from "next/router";
