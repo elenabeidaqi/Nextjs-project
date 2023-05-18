@@ -1,7 +1,8 @@
-import { getFeaturedEvents } from "../helpers/api-utils";
+import { getFeaturedEvents, getAllEvents } from "../helpers/api-utils";
 import EventList from "@/components/events/event-list";
 import EventSearch from "@/components/events/event.search";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 export default function Home(props: any) {
   const router = useRouter();
@@ -12,6 +13,13 @@ export default function Home(props: any) {
 
   return (
     <>
+      <Head>
+        <title>NextJS Events</title>
+        <meta
+          name="description"
+          content="Find a lot of great events that allow you to envolve..."
+        />
+      </Head>
       <EventSearch onSearch={findEventsHandler} />
       <EventList items={props.events} />
     </>
@@ -20,10 +28,10 @@ export default function Home(props: any) {
 
 export async function getStaticProps() {
   const featuredEvents = await getFeaturedEvents();
-  console.log("featuredEvents", featuredEvents);
   return {
     props: {
       events: featuredEvents,
     },
+    revalidate: 1800,
   };
 }

@@ -1,12 +1,39 @@
-import React from 'react';
-import EventList from '@/components/events/event-list';
-import {getAllEvents} from "../../dummy-data";
+import React from "react";
+import EventList from "@/components/events/event-list";
+import { getAllEvents } from "../../helpers/api-utils";
+import EventSearch from "../../components/events/event.search";
+import { useRouter } from "next/router";
+import Head from "next/head";
 
-function events() {
-  const events = getAllEvents();
+function events(props: any) {
+  const router = useRouter();
+  const findEventsHandler = (year: any, month: any) => {
+    const findpath = `/events/${year}/${month}`;
+    router.push(findpath);
+  };
   return (
-    <EventList items={events}/>
-  )
+    <>
+      <Head>
+        <title>All Events</title>
+        <meta
+          name="description"
+          content="Find a lot of great events that allow you to envolve..."
+        />
+      </Head>
+      <EventSearch onSearch={findEventsHandler} />
+      <EventList items={props.events} />
+    </>
+  );
 }
 
 export default events;
+
+export async function getStaticProps() {
+  const events = await getAllEvents();
+  return {
+    props: {
+      events: events,
+    },
+    revalidate: 60,
+  };
+}
