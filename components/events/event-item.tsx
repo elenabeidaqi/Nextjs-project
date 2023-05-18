@@ -4,7 +4,7 @@ import classes from "./event-item.module.css";
 import DateIcon from "../icon/date-icon";
 import AddressIcon from "../icon/address-icon";
 import ArrowRightIcon from "../icon/arrow-right-icon";
-
+import Image from "next/image";
 function EventItem(props: any) {
   const { id, location, title, date, image } = props;
   const humanReadableDate = new Date(date).toLocaleDateString("en-us", {
@@ -16,7 +16,7 @@ function EventItem(props: any) {
   const link = `/events/${id}`;
   return (
     <li className={classes.item}>
-      <img src={`/${image}`} alt={title} />
+      <Image src={`/${image}`} alt={title} width={250} height={160}/>
       <div className={classes.content}>
         <div className={classes.summary}>
           <h2>{title}</h2>
