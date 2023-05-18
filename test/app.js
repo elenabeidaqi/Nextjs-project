@@ -14,7 +14,7 @@ const DUMMY_EVENTS = [
       location: "Somestreet 25, 12345 San Somewhereo",
       date: "2021-05-12",
       image: "images/coding-event.jpg",
-      isFeatured: true,
+      isFeatured: false,
     },
     {
       id: "e2",
@@ -45,7 +45,7 @@ app.get('/', (req, res) => {
 
 app.post('/', (req, res) => {
     console.log(req.body);
-    res.send('kujyhgikuy');
+    res.send('response');
 })
 
 app.listen(4000, console.log("server started listening on port: 4000"));

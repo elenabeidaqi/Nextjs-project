@@ -1,17 +1,11 @@
-import axios from "axios";
-import {getAllEvents as getAllEvents2} from "../dummy-data"
-
-
 export async function getAllEvents() {
  const response = await fetch(
     "http://localhost:4000"
   )
-  
-  console.log("res", response)
+  // console.log("res", response)
   const data = await response.json();
   const events = [];
   
-
   for (const key in data) {
     events.push({
       id: key,
@@ -30,4 +24,18 @@ export async function getFeaturedEvents() {
 export async function getEventById(id : any) {
   const allEvents = await getAllEvents();
   return allEvents.find((event) => event.id === id);
+}
+
+export async function getFilteredEvents(dateFilter: any) {
+  const allEvents = await getAllEvents();
+  const { year, month } = dateFilter;
+
+  let filteredEvents = allEvents.filter((event) => {
+    const eventDate = new Date(event.date);
+    return (
+      eventDate.getFullYear() === year && eventDate.getMonth() === month - 1
+    );
+  });
+
+  return filteredEvents;
 }

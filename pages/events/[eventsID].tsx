@@ -1,21 +1,24 @@
-import { getEventById, getAllEvents } from "../../helpers/api-utils";
+import {
+  getEventById,
+  getAllEvents,
+  getFeaturedEvents,
+} from "../../helpers/api-utils";
 import EventLogistics from "../../components/event-detail/event-logistics";
 import EventSummary from "../../components/event-detail/event-summary";
 import EventContent from "../../components/event-detail/event.content";
 import React from "react";
 import Button from "@/components/ui/button";
 import ErrorAlert from "@/components/ui/error-alert";
+import Head from "next/head";
 
 function EventsID(props: any) {
   const event = props.selectedEvent;
-  console.log("event", event);
-
   if (!event) {
     return (
       <>
-        <ErrorAlert>
-          <p>Not Found!</p>
-        </ErrorAlert>
+        <div className="center">
+          <p>Loading...</p>
+        </div>
         <div className="center">
           <Button link="/events">Show all events</Button>
         </div>
@@ -25,6 +28,10 @@ function EventsID(props: any) {
 
   return (
     <>
+    <Head>
+      <title>{event.title}</title>
+      <meta name="description" content={event.description}/>
+    </Head>
       <EventSummary title={event.title} />
       <EventLogistics
         date={event.date}
@@ -42,24 +49,23 @@ function EventsID(props: any) {
 export default EventsID;
 
 export async function getStaticPaths() {
-  const events = await getAllEvents();
+  const events = await getFeaturedEvents();
   const paths = events.map((event: any) => ({
     params: { eventsID: event.id },
   }));
   return {
     paths: paths,
-    fallback: false,
+    fallback: "blocking",
   };
 }
 
 export async function getStaticProps(context: any) {
   const eventsID = context.params.eventsID;
   const event = await getEventById(eventsID);
-  console.log("event", event);
   return {
     props: {
       selectedEvent: event,
-      revalidate: 10,
     },
+    revalidate: 30,
   };
 }
