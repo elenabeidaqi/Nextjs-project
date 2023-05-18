@@ -28,10 +28,6 @@ function EventsID(props: any) {
 
   return (
     <>
-    <Head>
-      <title>{event.title}</title>
-      <meta name="description" content={event.description}/>
-    </Head>
       <EventSummary title={event.title} />
       <EventLogistics
         date={event.date}

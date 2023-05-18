@@ -32,20 +32,12 @@ function EventsSlugs(props: any) {
   //   );
   // }
   const filteredEvents = props.filteredEvents;
-  const pageHeadData = (
-    <Head>
-        <title>Filtered Events</title>
-        <meta
-          name="description"
-          content={`All events for ${props.date}`}
-        />
-      </Head>
-  )
+  
 
   if (props.notFoundEvents) {
     return (
       <>
-      {pageHeadData}
+    
         <ErrorAlert>
           <p>Events Not Found !!</p>
         </ErrorAlert>
@@ -57,7 +49,7 @@ function EventsSlugs(props: any) {
   }
   return (
     <div>
-      {pageHeadData}
+      
       <ResultsTitle date={props.date} />
       <EventList items={filteredEvents} />
     </div>

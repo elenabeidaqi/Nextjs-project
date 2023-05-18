@@ -13,13 +13,6 @@ function events(props: any) {
   };
   return (
     <>
-      <Head>
-        <title>All Events</title>
-        <meta
-          name="description"
-          content="Find a lot of great events that allow you to envolve..."
-        />
-      </Head>
       <EventSearch onSearch={findEventsHandler} />
       <EventList items={props.events} />
     </>
